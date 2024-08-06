@@ -1,6 +1,6 @@
 {
   "name": "@paiz4ever/cocos-cli",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "an unparalleled framework for CocosCreator",
   "bin": {
     "cocos-cli": "bin/index.js"
