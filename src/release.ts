@@ -56,7 +56,6 @@ async function main() {
 
     // 发布新版本
     console.log("正在发布新版本...");
-    execSync("");
     execSync("npm publish --registry https://registry.npmjs.org/", {
       stdio: "inherit",
     });
