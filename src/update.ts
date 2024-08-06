@@ -70,7 +70,10 @@ export async function updateProject(projectPath: string) {
 
     // 根据操作系统执行脚本
     const script = process.platform === "win32" ? "gen.bat" : "gen.sh";
-    await runCommand(script, [], { cwd: destPath });
+    const command = process.platform === "win32" ? script : "sh";
+    const args = process.platform === "win32" ? [] : [script];
+
+    await runCommand(command, args, { cwd: destPath });
 
     console.log("框架目录更新成功！");
   } catch (err) {

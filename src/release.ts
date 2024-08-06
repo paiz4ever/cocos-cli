@@ -40,12 +40,19 @@ async function main() {
     packageJson.version = newVersion;
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
-    // 提交更改并创建新标签
-    console.log("正在提交更改并创建新标签...");
+    const { commitMessage } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "commitMessage",
+        message: "请输入提交信息",
+        default: `release v${newVersion}`,
+      },
+    ]);
+    // 提交更改
+    console.log("正在提交更改...");
     execSync("git add .", { stdio: "inherit" });
-    execSync(`git commit -m "release: v${newVersion}"`, { stdio: "inherit" });
-    execSync(`git tag v${newVersion}`, { stdio: "inherit" });
-    execSync("git push --follow-tags", { stdio: "inherit" });
+    execSync(`git commit -m "${commitMessage}"`, { stdio: "inherit" });
+    execSync("git push", { stdio: "inherit" });
 
     // 发布新版本
     console.log("正在发布新版本...");
