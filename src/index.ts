@@ -1,5 +1,6 @@
 import { Command } from "commander";
 import { createProject } from "./create";
+import { updateProject } from "./update";
 
 export function main() {
   const program = new Command();
@@ -16,6 +17,13 @@ export function main() {
     .description("create a new cocos project")
     .action(async (projectPath: string) => {
       await createProject(projectPath);
+    });
+
+  program
+    .command("update <project-path>")
+    .description("update an existing cocos project")
+    .action(async (projectPath: string) => {
+      await updateProject(projectPath);
     });
 
   program.parse(process.argv);

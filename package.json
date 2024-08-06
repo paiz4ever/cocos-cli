@@ -1,6 +1,6 @@
 {
   "name": "@paiz4ever/cocos-cli",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "an unparalleled framework for CocosCreator",
   "bin": {
     "cocos-cli": "bin/index.js"
@@ -10,13 +10,13 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node bin/index.js"
+    "start": "tsc && node bin/index.js",
+    "release": "ts-node src/release.ts"
   },
   "keywords": [
     "cocos",
     "cocos creator",
-    "framework",
-    "cli"
+    "framework"
   ],
   "files": [
     "bin",

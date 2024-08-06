@@ -58,7 +58,7 @@ export async function createProject(projectPath: string) {
     // 进入项目目录并安装依赖
     console.log("正在安装依赖...");
     process.chdir(destPath);
-    await runCommand("npm", ["install"]);
+    await runCommand("npm", ["install"], { cwd: destPath });
     process.chdir(process.cwd());
     console.log(`项目创建成功！`);
     console.log(`请输入 cd ${projectPath} 进入项目`);
