@@ -43,13 +43,16 @@ async function main() {
     // 提交更改并创建新标签
     console.log("正在提交更改并创建新标签...");
     execSync("git add .", { stdio: "inherit" });
-    execSync(`git commit -m "Release v${newVersion}"`, { stdio: "inherit" });
+    execSync(`git commit -m "release: v${newVersion}"`, { stdio: "inherit" });
     execSync(`git tag v${newVersion}`, { stdio: "inherit" });
     execSync("git push --follow-tags", { stdio: "inherit" });
 
     // 发布新版本
     console.log("正在发布新版本...");
-    execSync("npm publish", { stdio: "inherit" });
+    execSync("");
+    execSync("npm publish --registry https://registry.npmjs.org/", {
+      stdio: "inherit",
+    });
 
     console.log(`发布成功: v${newVersion}`);
   } catch (error) {
