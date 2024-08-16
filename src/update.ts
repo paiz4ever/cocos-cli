@@ -5,8 +5,8 @@ import path from "path";
 import { Templates } from "./config";
 import { runCommand } from "./util";
 
-const updateDirs = ["extensions", "tables/luban"];
-const updateFiles = ["gen.bat", "gen.sh"];
+const updateDirs = ["extensions", "tables/luban", "scripts"] as string[];
+const updateFiles = [] as string[];
 
 export async function updateProject(projectPath: string) {
   const destPath = path.resolve(process.cwd(), projectPath);
@@ -69,9 +69,12 @@ export async function updateProject(projectPath: string) {
     await runCommand("npm", ["install"], { cwd: destPath });
 
     // 根据操作系统执行脚本
+    const scriptDir =
+      process.platform === "win32" ? "scripts/windows" : "scripts/unix";
     const script = process.platform === "win32" ? "gen.bat" : "gen.sh";
-    const command = process.platform === "win32" ? script : "sh";
-    const args = process.platform === "win32" ? [] : [script];
+    const command =
+      process.platform === "win32" ? `${scriptDir}/${script}` : "sh";
+    const args = process.platform === "win32" ? [] : [`${scriptDir}/${script}`];
 
     await runCommand(command, args, { cwd: destPath });
 

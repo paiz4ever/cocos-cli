@@ -9,11 +9,17 @@ export function runCommand(
     const child = spawn(command, args, options);
 
     child.stdout.on("data", (data) => {
-      console.log(data.toString());
+      const lines = data.toString().split("\n");
+      lines.forEach((line: string) => {
+        console.log(line);
+      });
     });
 
     child.stderr.on("data", (data) => {
-      console.error(data.toString());
+      const lines = data.toString().split("\n");
+      lines.forEach((line: string) => {
+        console.error(line);
+      });
     });
 
     child.on("close", (code) => {
